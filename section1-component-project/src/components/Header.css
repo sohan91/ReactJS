@@ -1,0 +1,9 @@
+.head-section {
+  background-color: rgb(53, 50, 50);
+  width: 400px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
