@@ -1,12 +1,6 @@
 import { SUMMARY } from './data.js';
-
-function Header() {
-  return (
-    <div className="head-section">
-      <h1>MOVIE DESCRIPTION</h1>
-    </div>
-  );
-}
+import {Header} from './components/Header.jsx';
+import { MovieCards } from './components/MovieCards.jsx';
 
 function MovieContainer() {
   return (
@@ -24,14 +18,7 @@ function MovieContainer() {
   );
 }
 
-function MovieCards({ title, images }) {
-  return (
-    <li className="card-container">
-      <span>{title}</span>
-      <img src={images} alt={title} />
-    </li>
-  );
-}
+
 
 function DescriptionContainer() {
   return <footer className="last-container"></footer>;
