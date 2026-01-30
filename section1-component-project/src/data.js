@@ -14,7 +14,7 @@ export  let SUMMARY = [
         description:"BAHUBALI info"
     },
     {
-        title:"Instersteller",
+        title:"Insterstellar",
         img:intersteller,
         description:"INTERSTELLAR INFO"
     }

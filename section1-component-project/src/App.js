@@ -1,35 +1,46 @@
-import { SUMMARY } from './data.js';
-import {Header} from './components/Header.jsx';
-import { MovieCards } from './components/MovieCards.jsx';
+import { SUMMARY } from "./data.js";
+import { useState } from "react";
+import { Header } from "./components/Header.jsx";
+import { MovieCards } from "./components/MovieCards.jsx";
+import {MovieSummery,Uri,Interstellar,Baahubali} from "./components/SummeryData.jsx";
 
-function MovieContainer() {
+const arr = [<Uri />, <Interstellar />, <Baahubali />];
+
+function MovieContainer({ onSelectSummary }) {
   return (
     <div className="middle-container">
       <ul>
-        {
-        SUMMARY.map((values, index) => (
+        {SUMMARY.map((values, index) => (
           <MovieCards
+            key={index}
             title={values.title}
             images={values.img}
+            summary={arr[index]}
+            onSelect={onSelectSummary}
           />
         ))}
       </ul>
     </div>
   );
 }
-
-
-
-function DescriptionContainer() {
-  return <footer className="last-container"></footer>;
+export function DescriptionContainer({ summary,...props }) {
+  return (
+    <footer {...props}>
+      {
+       <MovieSummery>{ summary===null ?<span class="msg">Please Select Any Movie</span>:summary}</MovieSummery>
+      }
+    </footer>
+  );
 }
 
 function App() {
+  const [movieSummary, setMovieSummery] = useState(null);
+
   return (
     <div className="container">
       <Header />
-      <MovieContainer />
-      <DescriptionContainer />
+      <MovieContainer onSelectSummary={setMovieSummery} />
+      <DescriptionContainer summary={movieSummary} className="last-container"/>
     </div>
   );
 }

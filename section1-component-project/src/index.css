@@ -18,9 +18,11 @@ body {
 .middle-container {
   display: flex;
   justify-content: center;
-  border: 2px solid gold;
-  width: 850px;
-  padding: 25px;
+  box-shadow: 
+    0px 4px 6px rgba(194, 192, 192, 0.08),
+    0px 10px 20px rgba(209, 214, 208, 0.12);
+  width: 950px;
+  padding: 20px;
   flex-wrap: wrap;
 }
 
@@ -35,7 +37,7 @@ body {
 }
 .card-container {
   flex: 1 1 200px;        
-  max-width: 220px;
+  max-width: 280px;
   transition: all 0.3s ease;
   perspective: 1000px;
 }
@@ -51,7 +53,7 @@ body {
 
 .card-container:hover {
   transform: scale(1.08) rotateY(10deg);
-  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 15px 40px rgba(52, 51, 50, 0.3);
   cursor: pointer;
 }
 
@@ -60,7 +62,7 @@ body {
 }
 
 .last-container {
-  border: 2px solid gold;
+  
   width: 1000px;
   height: 200px;
   display: flex;
@@ -68,8 +70,15 @@ body {
   align-items: center;
   color: #ccc;
   font-size: 16px;
+  display: inline-block;
+  box-shadow: 
+    0px 4px 6px rgba(194, 192, 192, 0.08),
+    0px 10px 20px rgba(209, 214, 208, 0.12);
 }
-
+h3{
+  padding-left: 35px;
+  padding-top: 10px;
+}
 @media (max-width: 1200px) {
   .middle-container {
     width: 70%;
@@ -78,4 +87,10 @@ body {
   .last-container {
     width: 90%;
   }
+}
+.msg
+{
+ margin-left: 60px;
+ position: relative;
+ top: 30px;
 }
