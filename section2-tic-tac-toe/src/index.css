@@ -1,0 +1,106 @@
+/* Base */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #f4f6f8;
+  color: #2c2c2c;
+  min-height:92.8vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  background: linear-gradient(rgb(37, 62, 109),rgb(97, 97, 99));
+}
+
+/* App container */
+main {
+  background: #ffffff;
+  padding: 24px 32px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(rgb(13, 82, 219),rgb(147, 144, 141));
+}
+
+/* Title */
+main h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: bolder;
+}
+
+/* Remove default list styles */
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 10px;
+}
+
+/* Players list */
+.list-players {
+  display: flex;
+  gap: 24px;
+}
+
+/* Player item */
+li.player-container {
+  border-radius: 8px;
+  padding: 8px 12px;
+  min-width: 200px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #abc9eb;
+}
+
+/* Player name */
+li.player-container span:first-child {
+  font-size: 18px;
+  font-weight: bold;
+}
+/* Symbol */
+li .symbol {
+  font-weight: 600;
+  color: #444;
+}
+
+/* Input */
+li.player-container input {
+  width: 90px;
+  height: 26px;
+  padding-left: 8px;
+  font-size: 14px;
+  border-radius: 8px;
+  outline: none;
+}
+
+/* Button */
+li button.span-btn{
+  height: 28px;
+  width: 60px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-right: 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  background: #5b5ded;
+  cursor: pointer;
+}
+
+li button.span-btn:hover {
+  background: #f0f2f5;
+}
+
+#active
+{
+  box-shadow: 2px 4px 12px rgb(30, 25, 165);
+  background-color: #2680f5;
+  color: rgb(10, 9, 9);
+  
+}
