@@ -1,28 +1,32 @@
+import { useState } from 'react';
 
-import {useState} from'react';
-export default function Player({player,symbol,isActive}) {
+export default function Player({ player, symbol, isActive, onNameChange }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [playerName, setPlayerName] = useState(player);
 
-    let [btnAction,setBtnAction] = useState(false);
-    let [playerName,setPlayerName] = useState(player);
-    let span =  <span>{playerName}</span>;
-    function nameHandler()
-    {
-          setBtnAction(prev=>!prev);
+  function handleEditToggle() {
+    if (isEditing) {
+      onNameChange(symbol, playerName);
     }
-    function editPlayerName(event)
-    {
-        let name = event.target.value;
-        setPlayerName(name !== " " ? name :player);
-    }
-    if(btnAction)
-    {
-        span = <input type="text" value={playerName} onChange={editPlayerName} />
-    }
+    setIsEditing(prev => !prev);
+  }
+
+  function handleChange(event) {
+    setPlayerName(event.target.value);
+  }
+
   return (
-    <li className="player-container" id={isActive ? "active" :undefined}>
-     {span}
-      <span className='symbol'>{symbol}</span>
-      <button class="span-btn"  onClick={nameHandler}>{btnAction?"Save":"Edit"}</button>
+    <li className="player-container" id={isActive ? 'active' : undefined}>
+      {isEditing ? (
+        <input type="text" value={playerName} onChange={handleChange} />
+      ) : (
+        <span>{playerName}</span>
+      )}
+
+      <span className="symbol">{symbol}</span>
+      <button className="span-btn" onClick={handleEditToggle}>
+        {isEditing ? 'Save' : 'Edit'}
+      </button>
     </li>
   );
 }

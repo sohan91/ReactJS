@@ -18,54 +18,29 @@ const INITIAL_BOARD = [
   [null, null, null],
 ];
 
-// 🔹 WIN CHECK (for-loop based)
 function checkWinner(board) {
+  for (let i = 0; i < 3; i++) {
+    if (board[i][0] && board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
+      return board[i][0];
+    }
+    if (board[0][i] && board[0][i] === board[1][i] && board[1][i] === board[2][i]) {
+      return board[0][i];
+    }
+  }
 
-  // Horizontal
-  for (let row = 0; row < 3; row++) {
-    if (
-      board[row][0] &&
-      board[row][0] === board[row][1] &&
-      board[row][1] === board[row][2]
-    ) {
-      return board[row][0];
-    }
-  }
-  for (let col = 0; col < 3; col++) {
-    if (
-      board[0][col] &&
-      board[0][col] === board[1][col] &&
-      board[1][col] === board[2][col]
-    ) {
-      return board[0][col];
-    }
-  }
-  if (
-    board[0][0] &&
-    board[0][0] === board[1][1] &&
-    board[1][1] === board[2][2]
-  ) {
+  if (board[0][0] && board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
     return board[0][0];
   }
-  if (
-    board[0][2] &&
-    board[0][2] === board[1][1] &&
-    board[1][1] === board[2][0]
-  ) {
+
+  if (board[0][2] && board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
     return board[0][2];
   }
 
   return null;
 }
+
 function isBoardFull(board) {
-  for (let row = 0; row < 3; row++) {
-    for (let col = 0; col < 3; col++) {
-      if (board[row][col] === null) {
-        return false;
-      }
-    }
-  }
-  return true;
+  return board.every(row => row.every(cell => cell !== null));
 }
 
 export default function GameBoard({ onSelect, playerSymbol, players }) {
@@ -76,22 +51,17 @@ export default function GameBoard({ onSelect, playerSymbol, players }) {
   function handleClick(rowIndex, colIndex) {
     if (winner || tie) return;
 
-    setBoard(prevBoard => {
-      if (prevBoard[rowIndex][colIndex]) {
-        return prevBoard;
-      }
+    setBoard(prev => {
+      if (prev[rowIndex][colIndex]) return prev;
 
-      const updatedBoard = prevBoard.map(row => [...row]);
-      updatedBoard[rowIndex][colIndex] = playerSymbol;
+      const updated = prev.map(row => [...row]);
+      updated[rowIndex][colIndex] = playerSymbol;
 
-      const win = checkWinner(updatedBoard);
-      if (win) {
-        setWinner(win);
-      } else if (isBoardFull(updatedBoard)) {
-        setTie(true);
-      }
+      const win = checkWinner(updated);
+      if (win) setWinner(win);
+      else if (isBoardFull(updated)) setTie(true);
 
-      return updatedBoard;
+      return updated;
     });
 
     onSelect();
@@ -103,31 +73,27 @@ export default function GameBoard({ onSelect, playerSymbol, players }) {
     setTie(false);
   }
 
+  const winnerName = winner ? players[winner] : '';
+
   return (
     <>
       {winner && (
-        <Message
-          text={`${players[winner]} Wins!`}
-          onRestart={handleRestart}
-        />
+        <Message text={`${winnerName} Wins! 🎉`} onRestart={handleRestart} />
       )}
 
       {tie && (
-        <Message
-          text="Match Tied!"
-          onRestart={handleRestart}
-        />
+        <Message text="Match Tied!" onRestart={handleRestart} />
       )}
 
       <ol className="list-symbol">
-        {board.map((row, rowIndex) => (
-          <li key={rowIndex}>
+        {board.map((row, r) => (
+          <li key={r}>
             <ol className="inner-list">
-              {row.map((cell, colIndex) => (
-                <li key={colIndex}>
+              {row.map((cell, c) => (
+                <li key={c}>
                   <button
                     id="btn-cell"
-                    onClick={() => handleClick(rowIndex, colIndex)}
+                    onClick={() => handleClick(r, c)}
                     disabled={cell || winner || tie}
                   >
                     {cell && <span id="symbol">{cell}</span>}

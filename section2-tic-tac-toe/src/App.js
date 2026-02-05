@@ -6,36 +6,48 @@ import Player from './GameContainer/Player/Player';
 
 function App() {
   const [activePlayer, setActivePlayer] = useState('X');
+
+  const [players, setPlayers] = useState({
+    X: 'PLAYER 1',
+    O: 'PLAYER 2',
+  });
+
   function handleSelectSquare() {
     setActivePlayer(prev => (prev === 'X' ? 'O' : 'X'));
   }
-  const players = {
-    X: 'PLAYER 1',
-    O: 'PLAYER 2',
-  };
+
+  function handlePlayerNameChange(symbol, newName) {
+    setPlayers(prev => ({
+      ...prev,
+      [symbol]: newName,
+    }));
+  }
+
   return (
     <main>
       <h1>TIC-TAC-TOE</h1>
 
       <div className="middle-container">
-        <ol className="list-players" id="active">
+        <ol className="list-players">
           <Player
-         player="PLAYER 1"
-        symbol="X"
-        isActive={activePlayer === 'X'}
+            player={players.X}
+            symbol="X"
+            isActive={activePlayer === 'X'}
+            onNameChange={handlePlayerNameChange}
           />
           <Player
-            player="PLAYER 2"
-        symbol="O"
+            player={players.O}
+            symbol="O"
             isActive={activePlayer === 'O'}
+            onNameChange={handlePlayerNameChange}
           />
         </ol>
       </div>
 
       <GameBoard
         onSelect={handleSelectSquare}
-     playerSymbol={activePlayer}
-       players={players} 
+        playerSymbol={activePlayer}
+        players={players}
       />
     </main>
   );
